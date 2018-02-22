@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('setup sonar container') {
             steps {
-                sh 'docker run  -d -p 9000:9000 --name mysonar sonarqube:6.3.1'
+                sh 'docker run  -d -p 9000:9000 --name mysonar1 sonarqube:6.3.1'
             }
         }
         stage('install and sonar parallel') {
@@ -19,7 +19,7 @@ pipeline {
                 always {
                     junit '**/target/*-reports/TEST-*.xml'
                     step([$class: 'CoberturaPublisher', coberturaReportFile: 'target/site/cobertura/coverage.xml'])
-                    sh 'docker stop mysonar'
+                    sh 'docker stop mysonar1'
                 }
             }
         }
