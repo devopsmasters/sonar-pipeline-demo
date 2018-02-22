@@ -5,6 +5,7 @@ pipeline {
         stage('setup sonar container') {
             steps {
                 sh 'docker run  -d -p 9000:9000 --name mysonar1 sonarqube:6.3.1'
+                sh 'sleep 10'
             }
         }
         stage('install and sonar parallel') {
